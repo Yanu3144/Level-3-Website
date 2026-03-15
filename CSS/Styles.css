@@ -16,7 +16,7 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: url(..//Assets/game_img.avif) no-repeat;
+    background-color: aqua;
     background-size: cover;
     background-position: center;
 }
@@ -116,7 +116,7 @@ body {
     font-weight: 600;
 }
 
-.register-linkn p a {
+.register-link p a {
     text-decoration: underline;
 }
 
