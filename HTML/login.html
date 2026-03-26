@@ -13,7 +13,7 @@
     <div class="wrapper">
         <form action="/login" method="POST">
             <div class="logo-container">
-                <img src="..//static/Assets/Gamelens.png" alt="GameLens Logo" class="logo">
+                <img src="{{ url_for('static', filename='Gamelens.png') }}" alt="GameLens Logo" class="logo">
             </div>
 
             <h1>Login</h1>
@@ -38,7 +38,7 @@
             <div class="register-link">
                 <p>Don't have an account? <a href="{{ url_for('register_page') }}">Register</a></p>
             </div>
-        </form>
+        </form>      
     </div>
 
 </body>
