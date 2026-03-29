@@ -1,6 +1,7 @@
 import sqlite3
 from flask import Flask, request, redirect, render_template, url_for
 from pathlib import Path
+from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__, template_folder='HTML')
 DB = Path("website.db")
@@ -25,19 +26,20 @@ def login_page():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-
         conn = get_db()
         cursor = conn.cursor()
         cursor.execute("SELECT * FROM users WHERE user_name=? AND password=?", (username, password))
         user = cursor.fetchone()
         conn.close()
-
         if user:
             return "Login successful"
         else:
             return "Invalid username or password"
+    return render_template("login.html")
 
-    return render_template("login.html") 
+@app.route('/register')
+def register_page():
+    return "Registration Page"
 
 if __name__ == '__main__':
     init_db()
