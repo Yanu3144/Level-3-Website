@@ -1,7 +1,6 @@
 import sqlite3
 from flask import Flask, request, redirect, render_template, url_for
 from pathlib import Path
-from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__, template_folder='HTML')
 DB = Path("website.db")
@@ -28,18 +27,30 @@ def login_page():
         password = request.form['password']
         conn = get_db()
         cursor = conn.cursor()
+        # Note: In a real app, use werkzeug.security to check hashes!
         cursor.execute("SELECT * FROM users WHERE user_name=? AND password=?", (username, password))
         user = cursor.fetchone()
         conn.close()
         if user:
-            return "Login successful"
+            return "<h1>Login successful! Welcome to GameLens.</h1>"
         else:
-            return "Invalid username or password"
+            return "<h1>Invalid username or password</h1><a href='/login'>Try again</a>"
     return render_template("login.html")
 
-@app.route('/register')
+@app.route('/register', methods=['GET', 'POST'])
 def register_page():
-    return "Registration Page"
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        
+        conn = get_db()
+        cursor = conn.cursor()
+        cursor.execute("INSERT INTO users (user_name, password) VALUES (?, ?)", (username, password))
+        conn.commit()
+        conn.close()
+        return redirect(url_for('login_page'))
+        
+    return render_template("register.html")
 
 if __name__ == '__main__':
     init_db()
