@@ -27,7 +27,6 @@ def login_page():
         password = request.form['password']
         conn = get_db()
         cursor = conn.cursor()
-        # Note: In a real app, use werkzeug.security to check hashes!
         cursor.execute("SELECT * FROM users WHERE user_name=? AND password=?", (username, password))
         user = cursor.fetchone()
         conn.close()
