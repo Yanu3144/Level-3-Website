@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Browse Games</title>
+
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="{{ url_for('static', filename='Styles.css') }}">
+</head>
+
+<body>
+
+<div class="wrapper">
+
+    <div class="logo-container">
+        <img src="{{ url_for('static', filename='Gamelens.png') }}" class="logo">
+    </div>
+
+    <h1>Browse Games</h1>
+
+    
+    <form method="GET" action="/browse">
+
+        <div class="input-box">
+            <input type="text" name="search" placeholder="Search games">
+            <i class='bx bx-search'></i>
+        </div>
+
+        <div class="input-box">
+            <input type="text" name="genre" placeholder="Genre">
+            <i class='bx bx-category'></i>
+        </div>
+
+        <div class="input-box">
+            <input type="text" name="platform" placeholder="Platform">
+            <i class='bx bx-desktop'></i>
+        </div>
+
+        <button type="submit" class="btn">Search</button>
+    </form>
+
+        <div class="featured">
+        <h2>Results</h2>
+
+    
+        <div class="game-card">
+            <h3>Game Title</h3>
+            <p>Genre: RPG</p>
+            <p>Platform: PC</p>
+            <a href="{{ url_for('add_review_page') }}">
+                <button class="btn">Add Review</button>
+            </a>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
