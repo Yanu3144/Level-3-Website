@@ -4,57 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GameLens Home</title>
-
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="{{ url_for('static', filename='Styles.css') }}">
 </head>
-
 <body>
-
 <div class="wrapper">
-
-    <!-- Logo -->
     <div class="logo-container">
         <img src="{{ url_for('static', filename='Gamelens.png') }}" alt="GameLens Logo" class="logo">
     </div>
-
     <h1>Welcome to GameLens</h1>
     <p style="text-align:center; margin-bottom:20px;">
         Find out if a game is worth buying before you spend your money.
     </p>
-
     <div class="home-buttons">
-
         <a href="{{ url_for('login_page') }}">
             <button class="btn">Login</button>
         </a>
-
         <a href="{{ url_for('register_page') }}">
             <button class="btn">Register</button>
         </a>
-
-        <a href="{{ url_for('browse_page') }}">
-            <button class="btn">Browse Games</button>
-        </a>
-
     </div>
-
-    <div class="featured">
-        <h2>Featured Games</h2>
-
-        <div class="game-card">
-            <h3>Elden Ring</h3>
-            <p> 9.5 / 10</p>
-        </div>
-
-        <div class="game-card">
-            <h3>Cyberpunk 2077</h3>
-            <p> 8.2 / 10</p>
-        </div>
-
-    </div>
-
 </div>
-
 </body>
 </html>

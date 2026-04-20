@@ -3,70 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GameLens - Game Page</title>
-
+    <title>GameLens - {{ game.title }}</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="{{ url_for('static', filename='Styles.css') }}">
 </head>
-
 <body>
     <div class="wrapper">
-
-
         <div class="logo-container">
             <img src="{{ url_for('static', filename='Gamelens.png') }}" alt="GameLens Logo" class="logo">
         </div>
-
-        
         <h1>{{ game.title }}</h1>
-
-       
         <div class="game-info">
             <p><strong>Genre:</strong> {{ game.genre }}</p>
-            <p><strong>Platform:</strong> {{ game.platform }}</p>
-            <p><strong>Release Year:</strong> {{ game.release_year }}</p>
+            <p><strong>Developer:</strong> {{ game.developer }}</p>
+            <p><strong>Release Date:</strong> {{ game.release_date }}</p>
+            <p><strong>Price:</strong> ${{ game.price }}</p>
         </div>
-
-                <div class="rating-box">
+        {% if avg_rating != "No ratings" %}
+        <div class="rating-box">
             <h3>Average Rating</h3>
             <p class="rating-score">
-                <i class="bx bxs-star"></i> {{ game.avg_rating }}/10
+                <i class="bx bxs-star"></i> {{ avg_rating }}/10
             </p>
         </div>
-
-                <form action="{{ url_for('add_review', game_id=game.id) }}" method="POST">
-
+        {% endif %}
+        {% if 'user_id' in session %}
+        <form action="{{ url_for('add_review', game_id=game.id) }}" method="POST">
             <h3>Leave a Review</h3>
-
             <div class="input-box">
                 <input type="number" name="rating" min="1" max="10" placeholder="Rating (1-10)" required>
                 <i class="bx bxs-star"></i>
             </div>
-
             <div class="input-box">
                 <textarea name="review" placeholder="Write your review..." required></textarea>
             </div>
-
             <button type="submit" class="btn">Submit Review</button>
         </form>
-
-        
+        {% endif %}
         <div class="reviews">
             <h3>Reviews</h3>
-
             {% for review in reviews %}
                 <div class="review-card">
                     <p><strong>{{ review.username }}</strong> - ⭐ {{ review.rating }}/10</p>
                     <p>{{ review.comment }}</p>
                 </div>
             {% endfor %}
-
         </div>
-
         <div class="register-link">
             <p><a href="{{ url_for('browse_games') }}">← Back to Games</a></p>
         </div>
-
     </div>
 </body>
 </html>
+
