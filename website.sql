@@ -31,7 +31,8 @@ CREATE TABLE [reviews] (
   [game_id] int NOT NULL,
   [rating] int NOT NULL,
   [review_text] text NOT NULL,
-  [created_at] datetime NOT NULL
+  [created_at] datetime NOT NULL,
+  [comments] text Not Null
 )
 GO
 
