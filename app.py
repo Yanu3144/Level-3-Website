@@ -199,6 +199,43 @@ def game_page(game_id):
         avg_rating=round(avg_rating, 1) if avg_rating else "No ratings"
     )
 
+@app.route('/add-review', methods=['GET', 'POST'])
+def add_review_page():
+    if request.method == 'GET':
+        if "user_id" not in session:
+            return redirect(url_for("login_page"))
+        return render_template("add_review.html")
+
+    # POST
+    if "user_id" not in session:
+        return redirect(url_for("login_page"))
+
+    game_title = request.form.get('game')
+    rating = request.form.get('rating')
+    review_text = request.form.get('review')
+
+    conn = get_db()
+    game = conn.execute("SELECT id FROM games WHERE title = ?", (game_title,)).fetchone()
+    if not game:
+        conn.close()
+        return "Game not found. Use exact name like 'CyberQuest'."
+
+    game_id = game['id']
+    
+    try:
+        conn.execute("""
+            INSERT INTO reviews (user_id, game_id, rating, review_text)
+            VALUES (?, ?, ?, ?)
+        """, (session['user_id'], game_id, int(rating), review_text))
+        conn.commit()
+    except Exception as e:
+        conn.close()
+        return f"Error: {str(e)}"
+    conn.close()
+
+    return redirect(url_for('game_page', game_id=game_id))
+
+
 @app.route('/add_review/<int:game_id>', methods=['POST'])
 def add_review(game_id):
     if "user_id" not in session:
