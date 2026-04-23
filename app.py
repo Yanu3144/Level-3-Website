@@ -199,8 +199,6 @@ def game_page(game_id):
         avg_rating=round(avg_rating, 1) if avg_rating else "No ratings"
     )
 
-
-
 @app.route('/add_review/<int:game_id>', methods=['POST'])
 def add_review(game_id):
     if "user_id" not in session:
@@ -219,8 +217,6 @@ def add_review(game_id):
     conn.close()
 
     return redirect(url_for('game_page', game_id=game_id))
-
-
 
 if __name__ == '__main__':
     init_db()

@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GameLens - {{ game.title }}</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="{{ url_for('static', filename='Styles.css') }}">
+     <link rel="stylesheet" href="{{ url_for('static', filename='Styles.css') }}">
 </head>
 <body>
-    <div class="wrapper">
+<div class="wrapper game-page">
         <div class="logo-container">
             <img src="{{ url_for('static', filename='Gamelens.png') }}" alt="GameLens Logo" class="logo">
         </div>
@@ -44,7 +44,7 @@
             <h3>Reviews</h3>
             {% for review in reviews %}
                 <div class="review-card">
-                    <p><strong>{{ review.username }}</strong> - ⭐ {{ review.rating }}/10</p>
+                    <p><strong>{{ review.username }}</strong>  {{ review.rating }}/10</p>
                     <p>{{ review.comment }}</p>
                 </div>
             {% endfor %}
