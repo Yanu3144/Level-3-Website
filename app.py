@@ -8,7 +8,6 @@ app.secret_key = "gamelens_secret_key"
 DB = Path("website.db")
 
 
-
 def get_db():
     conn = sqlite3.connect(DB)
     conn.row_factory = sqlite3.Row
@@ -53,7 +52,6 @@ def init_db():
         FOREIGN KEY (game_id) REFERENCES games(id)
     );
     """)
-
 
     if conn.execute("SELECT COUNT(*) FROM genre").fetchone()[0] == 0:
         conn.execute("INSERT INTO genre (name) VALUES ('Action'), ('RPG'), ('Sports')")

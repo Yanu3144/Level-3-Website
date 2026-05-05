@@ -24,6 +24,7 @@
         {% for game in games %}
         <div class="game-card">
             <h3>{{ game.title }}</h3>
+            <img class="game-image" src="{{ url_for('static', filename='Images/' ~ game.title|lower ~ '.jpg') }}" alt="{{ game.title }}">
             <p>Genre: {{ game.genre }}</p>
             <p>Developer: {{ game.developer }}</p>
             <p>Price: ${{ game.price }}</p>
@@ -39,3 +40,4 @@
 </div>
 </body>
 </html>
+
