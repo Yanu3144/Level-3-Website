@@ -222,9 +222,13 @@ def add_review_page():
     
     try:
         conn.execute("""
-            INSERT INTO reviews (user_id, game_id, rating, review_text)
+        INSERT INTO reviews (user_id, game_id, rating, comment)
             VALUES (?, ?, ?, ?)
         """, (session['user_id'], game_id, int(rating), review_text))
+        if not review_text or not review_text.strip():
+            conn.close()
+            return "Review cannot be empty"
+
         conn.commit()
     except Exception as e:
         conn.close()

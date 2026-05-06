@@ -213,18 +213,51 @@ body {
     justify-content: center;
 }
 
+.browse-page .featured {
+    gap: 25px; /* 20–30px */
+}
+
 .browse-page .featured .game-card {
-    flex: 1 1 calc(33.333% - 15px);
-    min-width: 280px;
-    max-width: 350px;
+    /* about 48–50% width => 2 per row */
+    flex: 1 1 calc(50% - 12.5px);
+    max-width: calc(50% - 12.5px);
+    min-width: 0;
+    height: 360px; /* 320–380px */
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 10px;
+}
+
+.browse-page .featured .game-card h3 {
+    margin-bottom: 8px;
+    font-size: 18px;
+}
+
+.browse-page .featured .game-card .game-image {
+    /* image inside card: 180–220px */
+    height: 200px;
+}
+
+.browse-page .featured .game-card p {
+    margin-top: 4px;
 }
 
 @media (max-width: 768px) {
+    .browse-page .featured {
+        gap: 20px;
+    }
+
     .browse-page .featured .game-card {
         flex: 1 1 100%;
         max-width: none;
+        height: auto;
+    }
+
+    .browse-page .featured .game-card .game-image {
+        height: 200px;
     }
 }
+
 
 .game-page {
     max-width: 95vw;
