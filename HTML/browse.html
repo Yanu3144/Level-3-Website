@@ -7,37 +7,53 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='Styles.css') }}">
 </head>
 <body>
+
 <div class="wrapper browse-page">
+
     <div class="logo-container">
         <img src="{{ url_for('static', filename='Gamelens.png') }}" class="logo">
     </div>
-    <h1>Browse Games</h1>
+
     <form method="GET" action="/browse">
         <div class="input-box">
             <input type="text" name="search" placeholder="Search games">
             <i class='bx bx-search'></i>
         </div>
+
         <button type="submit" class="btn">Search</button>
     </form>
+
+    <h1>Games</h1>
+
     <div class="featured">
-        <h2>Games</h2>
+
         {% for game in games %}
         <div class="game-card">
+
             <h3>{{ game.title }}</h3>
-            <img class="game-image" src="{{ url_for('static', filename='Images/' ~ game.title|lower ~ '.jpg') }}" alt="{{ game.title }}">
+
+            <img class="game-image"
+                 src="{{ url_for('static', filename='Images/' ~ game.title|lower ~ '.jpg') }}"
+                 alt="{{ game.title }}">
+
             <p>Genre: {{ game.genre }}</p>
             <p>Developer: {{ game.developer }}</p>
             <p>Price: ${{ game.price }}</p>
+
             <a href="{{ url_for('game_page', game_id=game.id) }}">
                 <button class="btn">View Game & Reviews</button>
             </a>
+
         </div>
         {% endfor %}
+
     </div>
+
     <div class="register-link">
         <p><a href="{{ url_for('home') }}">← Home</a></p>
     </div>
+
 </div>
+
 </body>
 </html>
-
