@@ -151,15 +151,34 @@ def browse_games():
     if "user_id" not in session:
         return redirect(url_for("login_page"))
 
+    search = (request.args.get('search') or '').strip()
+
     conn = get_db()
-    games = conn.execute("""
+
+    base_query = """
         SELECT games.*, genre.name AS genre
         FROM games
         JOIN genre ON games.genre_id = genre.id
-    """).fetchall()
+    """
+
+    if search:
+        # Match genre name, title, or developer (case-insensitive LIKE via LOWER)
+        games = conn.execute(
+            base_query + """
+            WHERE LOWER(genre.name) LIKE ?
+               OR LOWER(games.title) LIKE ?
+               OR LOWER(games.developer) LIKE ?
+            ORDER BY games.id DESC
+            """,
+            (f"%{search.lower()}%", f"%{search.lower()}%", f"%{search.lower()}%",)
+        ).fetchall()
+    else:
+        games = conn.execute(base_query + " ORDER BY games.id DESC").fetchall()
+
     conn.close()
 
-    return render_template("browse.html", games=games)
+    return render_template("browse.html", games=games, search=search)
+
 
 
 
