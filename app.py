@@ -51,6 +51,15 @@ def init_db():
         FOREIGN KEY (user_id) REFERENCES users(id),
         FOREIGN KEY (game_id) REFERENCES games(id)
     );
+
+    CREATE TABLE IF NOT EXISTS wishlist (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id INTEGER NOT NULL,
+        game_id INTEGER NOT NULL,
+        UNIQUE(user_id, game_id),
+        FOREIGN KEY(user_id) REFERENCES users(id),
+        FOREIGN KEY(game_id) REFERENCES games(id)
+    );
     """)
 
     if conn.execute("SELECT COUNT(*) FROM genre").fetchone()[0] == 0:
@@ -82,7 +91,8 @@ def login_page():
 
         conn = get_db()
         user = conn.execute(
-            "SELECT * FROM users WHERE user_name=?", (username,)
+            "SELECT * FROM users WHERE user_name=?",
+            (username,)
         ).fetchone()
         conn.close()
 
@@ -114,7 +124,6 @@ def register_page():
             conn.commit()
             conn.close()
             return redirect(url_for('login_page'))
-
         except sqlite3.IntegrityError:
             return "User already exists"
 
@@ -134,7 +143,8 @@ def forgot_password():
 
         conn = get_db()
         user = conn.execute(
-            "SELECT * FROM users WHERE email=?", (email,)
+            "SELECT * FROM users WHERE email=?",
+            (email,)
         ).fetchone()
         conn.close()
 
@@ -143,7 +153,6 @@ def forgot_password():
         return "Email not found"
 
     return render_template("forgot_password.html")
-
 
 
 @app.route('/browse')
@@ -162,7 +171,6 @@ def browse_games():
     """
 
     if search:
-        # Match genre name, title, or developer (case-insensitive LIKE via LOWER)
         games = conn.execute(
             base_query + """
             WHERE LOWER(genre.name) LIKE ?
@@ -180,6 +188,91 @@ def browse_games():
     return render_template("browse.html", games=games, search=search)
 
 
+@app.route('/profile')
+def profile():
+    if "user_id" not in session:
+        return redirect(url_for("login_page"))
+
+    conn = get_db()
+
+    user = conn.execute(
+        "SELECT * FROM users WHERE id = ?",
+        (session["user_id"],)
+    ).fetchone()
+
+    if not user:
+        conn.close()
+        return redirect(url_for("logout"))
+
+    review_count = conn.execute(
+        "SELECT COUNT(*) AS cnt FROM reviews WHERE user_id = ?",
+        (session["user_id"],)
+    ).fetchone()["cnt"]
+
+    user_reviews = conn.execute("""
+        SELECT reviews.rating, reviews.comment, games.title AS game_title
+        FROM reviews
+        JOIN games ON reviews.game_id = games.id
+        WHERE reviews.user_id = ?
+        ORDER BY reviews.id DESC
+    """, (session["user_id"],)).fetchall()
+
+    favourite_games = conn.execute("""
+        SELECT games.id, games.title, genre.name AS genre
+        FROM games
+        JOIN genre ON games.genre_id = genre.id
+        WHERE games.id IN (
+            SELECT game_id FROM wishlist WHERE user_id = ?
+        )
+    """, (session["user_id"],)).fetchall()
+
+    favourite_count = len(favourite_games)
+
+    conn.close()
+
+    user_dict = dict(user)
+    user_dict.setdefault("created_at", "N/A")
+
+    return render_template(
+        "profile.html",
+        user=user_dict,
+        review_count=review_count,
+        favourite_count=favourite_count,
+        user_reviews=user_reviews,
+        favourite_games=favourite_games
+    )
+
+
+@app.route('/add-wishlist/<int:game_id>')
+def add_wishlist(game_id):
+    if "user_id" not in session:
+        return redirect(url_for("login_page"))
+
+    conn = get_db()
+    conn.execute(
+        "INSERT OR IGNORE INTO wishlist (user_id, game_id) VALUES (?, ?)",
+        (session["user_id"], game_id)
+    )
+    conn.commit()
+    conn.close()
+
+    return redirect(request.referrer or url_for("browse_games"))
+
+
+@app.route('/remove-wishlist/<int:game_id>')
+def remove_wishlist(game_id):
+    if "user_id" not in session:
+        return redirect(url_for("login_page"))
+
+    conn = get_db()
+    conn.execute(
+        "DELETE FROM wishlist WHERE user_id = ? AND game_id = ?",
+        (session["user_id"], game_id)
+    )
+    conn.commit()
+    conn.close()
+
+    return redirect(url_for("profile"))
 
 
 @app.route('/game/<int:game_id>')
@@ -216,46 +309,6 @@ def game_page(game_id):
         avg_rating=round(avg_rating, 1) if avg_rating else "No ratings"
     )
 
-@app.route('/add-review', methods=['GET', 'POST'])
-def add_review_page():
-    if request.method == 'GET':
-        if "user_id" not in session:
-            return redirect(url_for("login_page"))
-        return render_template("add_review.html")
-
-    # POST
-    if "user_id" not in session:
-        return redirect(url_for("login_page"))
-
-    game_title = request.form.get('game')
-    rating = request.form.get('rating')
-    review_text = request.form.get('review')
-
-    conn = get_db()
-    game = conn.execute("SELECT id FROM games WHERE title = ?", (game_title,)).fetchone()
-    if not game:
-        conn.close()
-        return "Game not found. Use exact name like 'CyberQuest'."
-
-    game_id = game['id']
-    
-    try:
-        conn.execute("""
-        INSERT INTO reviews (user_id, game_id, rating, comment)
-            VALUES (?, ?, ?, ?)
-        """, (session['user_id'], game_id, int(rating), review_text))
-        if not review_text or not review_text.strip():
-            conn.close()
-            return "Review cannot be empty"
-
-        conn.commit()
-    except Exception as e:
-        conn.close()
-        return f"Error: {str(e)}"
-    conn.close()
-
-    return redirect(url_for('game_page', game_id=game_id))
-
 
 @app.route('/add_review/<int:game_id>', methods=['POST'])
 def add_review(game_id):
@@ -275,6 +328,7 @@ def add_review(game_id):
     conn.close()
 
     return redirect(url_for('game_page', game_id=game_id))
+
 
 if __name__ == '__main__':
     init_db()
