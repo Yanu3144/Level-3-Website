@@ -63,7 +63,8 @@ def init_db():
     """)
 
     if conn.execute("SELECT COUNT(*) FROM genre").fetchone()[0] == 0:
-        conn.execute("INSERT INTO genre (name) VALUES ('Action'), ('RPG'), ('Sports')")
+        conn.execute(
+            "INSERT INTO genre (name) VALUES ('Action'), ('RPG'), ('Sports')")
 
     if conn.execute("SELECT COUNT(*) FROM games").fetchone()[0] == 0:
         conn.execute("""
@@ -211,6 +212,7 @@ def profile():
 
     user_reviews = conn.execute("""
         SELECT reviews.rating, reviews.comment, games.title AS game_title
+
         FROM reviews
         JOIN games ON reviews.game_id = games.id
         WHERE reviews.user_id = ?
@@ -312,17 +314,30 @@ def game_page(game_id):
 
 @app.route('/add_review/<int:game_id>', methods=['POST'])
 def add_review(game_id):
+    # Ensure incoming form data matches the DB schema.
+    # In this project the reviews table column is `comment` and it is NOT NULL.
+
     if "user_id" not in session:
         return redirect(url_for("login_page"))
 
     rating = request.form.get('rating')
-    comment = request.form.get('review')
+    comment = request.form.get('review', '')
+
+    # Reviews table in this project uses NOT NULL column `review_text`
+    if comment is None:
+        comment = ''
+
+    if not str(comment).strip():
+        return redirect(url_for('game_page', game_id=game_id))
 
     conn = get_db()
-    conn.execute("""
-        INSERT INTO reviews (user_id, game_id, rating, comment)
-        VALUES (?, ?, ?, ?)
-    """, (session['user_id'], game_id, rating, comment))
+    conn.execute(
+        """
+        INSERT INTO reviews (user_id, game_id, rating, review_text, comment, created_at)
+        VALUES (?, ?, ?, ?, ?, datetime('now'))
+        """,
+        (session['user_id'], game_id, rating, comment.strip(), comment.strip())
+    )
 
     conn.commit()
     conn.close()
