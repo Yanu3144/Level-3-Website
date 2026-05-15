@@ -23,7 +23,7 @@
 
       <nav class="navbar">
         <a href="{{ url_for('browse_games') }}">Browse</a>
-        <a href="{{ url_for('login_page') }}">Logout</a>
+        <a href="{{ url_for('home') }}">Logout</a>
 
         <a href="{{ url_for('profile') }}">Profile</a>
       </nav>
@@ -42,22 +42,25 @@
         <button type="submit" class="btn">Search</button>
       </form>
 
-      <h1>Introduction</h1>
+      {% if not search %}
+        <h1>Introduction</h1>
 
-      <section class="browse-introduction" aria-label="Introduction">
-        <h2>Welcome to GameLens</h2>
-        <p>
-          Welcome to GameLens, your place to discover, explore, and review video
-          games from different genres and platforms. Whether you are searching
-          for popular AAA titles, indie favourites, or classic games, GameLens
-          helps players find detailed information, ratings, and community
-          reviews all in one place. Browse through a growing collection of
-          games, read reviews from other users, and share your own gaming
-          experiences. With an easy-to-use interface and organised game
-          categories, GameLens is designed to help gamers quickly find new
-          titles to enjoy and connect with the gaming community.
-        </p>
-      </section>
+        <section class="browse-introduction" aria-label="Introduction">
+          <h2>Welcome to GameLens</h2>
+          <p>
+            Welcome to GameLens, your place to discover, explore, and review video
+            games from different genres and platforms. Whether you are searching
+            for popular AAA titles, indie favourites, or classic games, GameLens
+            helps players find detailed information, ratings, and community
+            reviews all in one place. Browse through a growing collection of
+            games, read reviews from other users, and share your own gaming
+            experiences. With an easy-to-use interface and organised game
+            categories, GameLens is designed to help gamers quickly find new
+            titles to enjoy and connect with the gaming community.
+          </p>
+        </section>
+      {% endif %}
+
 
       <h1>Games</h1>
 
