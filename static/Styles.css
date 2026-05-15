@@ -1,472 +1,507 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box; 
-    font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
 }
 
 body {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    min-height: 100vh;
-    background-image: url("/static/Assets/Background.png"); 
-    background-size: cover;
-    background-position: center;
-    overflow-y: auto;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  background-image: url("/static/Assets/Background.png");
+  background-size: cover;
+  background-position: center;
+  overflow-y: auto;
 }
 
-
 .wrapper {
-    width: 420px;
-    position: relative;
-    background: transparent;
-    border: 2px solid rgba(255, 255, 255, .2);
-    backdrop-filter: blur(20px);
-    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
-    color: #fff;
-    border-radius: 10px;
-    padding: 30px 40px;
+  width: 420px;
+  position: relative;
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  color: #fff;
+  border-radius: 10px;
+  padding: 30px 40px;
+  margin-top: 200px;
 }
 
 .wrapper h1 {
-    font-size: 36px;
-    text-align: center;
-    margin-top: 25px;
-    margin-bottom: 25px;
+  font-size: 36px;
+  text-align: center;
+  margin-top: 25px;
+  margin-bottom: 25px;
 }
 
 .wrapper .input-box {
-    position: relative; 
-    width: 100%;
-    margin: 30px 0;
+  position: relative;
+  width: 100%;
+  margin: 30px 0;
 }
 
 .input-box input {
-    width: 100%;
-    height: 50px;
-    background: transparent;
-    border: 2px solid rgba(255, 255, 255, .2);
-    outline: none;
-    border-radius: 40px;
-    font-size: 16px;
-    color: #fff;
-    padding: 0 45px 0 20px;
+  width: 100%;
+  height: 50px;
+  background: rgba(0, 0, 0, 0.15);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  outline: none;
+  border-radius: 40px;
+  font-size: 16px;
+  color: #fff;
+  padding: 0 45px 0 20px;
 }
 
 .input-box input::placeholder {
-    color: #fff;
+  color: #fff;
 }
 
 .input-box i {
-    position: absolute;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 20px;
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
 }
 
 .wrapper .remember-forgot {
-    display: flex;
-    justify-content: space-between;
-    font-size: 14.5px;
-    margin: -15px 0 15px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 14.5px;
+  margin: -15px 0 15px;
 }
 
 .remember-forgot label input {
-    accent-color: #fff;
-    margin-right: 3px;
+  accent-color: #fff;
+  margin-right: 3px;
 }
 
 .remember-forgot a {
-    color: #fff;
-    text-decoration: none;
+  color: #fff;
+  text-decoration: none;
 }
 
 .remember-forgot a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .wrapper .btn {
-    width: 100%;
-    height: 45px;
-    background: #fff;
-    border: none;
-    outline: none;
-    border-radius: 40px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, .1); 
-    cursor: pointer;
-    font-size: 16px;
-    color: #333;
-    font-weight: 600;
-    transition: 0.3s;
+  width: 100%;
+  height: 45px;
+  background: #fff;
+  border: none;
+  outline: none;
+  border-radius: 40px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  font-size: 16px;
+  color: #333;
+  font-weight: 600;
+  transition: 0.3s;
 }
 
 .wrapper .btn:hover {
-    background: #ddd;
+  background: #ddd;
 }
 
 .wrapper .register-link {
-    font-size: 14.5px;
-    text-align: center;
-    margin: 20px 0 15px;
+  font-size: 14.5px;
+  text-align: center;
+  margin: 20px 0 15px;
 }
 
 .register-link p a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: 600;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
 }
 
 .register-link p a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .logo-container {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
 }
 
 .logo {
-    width: 100px; 
-    height: auto;
+  width: 100px;
+  height: auto;
 }
 
 .wrapper p {
-    text-align: center;
-    font-size: 14px;
-    margin-top: 10px;
+  text-align: center;
+  font-size: 14px;
+  margin-top: 10px;
 }
 
 .home-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
 }
 
 .featured {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 25px;
-    justify-content: space-between;
-    margin-top: 25px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  justify-content: space-between;
+  margin-top: 25px;
 }
 
 .featured h2 {
-    width: 100%;
-    text-align: center;
-    font-size: 22px;
-    margin-bottom: 15px;
+  width: 100%;
+  text-align: center;
+  font-size: 22px;
+  margin-bottom: 15px;
 }
 
 .browse-introduction {
-    width: 100%;
-    text-align: center;
-    margin: 10px 0 25px;
-    padding: 18px 22px;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 10px;
-    backdrop-filter: blur(20px);
+  width: 100%;
+  text-align: center;
+  margin: 10px 0 25px;
+  padding: 18px 22px;
+  background: rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  backdrop-filter: blur(20px);
 }
 
 .browse-introduction h2 {
-    font-size: 20px;
-    margin-bottom: 10px;
+  font-size: 20px;
+  margin-bottom: 10px;
 }
 
 .browse-introduction p {
-    font-size: 14.5px;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.95);
-    margin: 0;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.95);
+  margin: 0;
+  text-shadow: #333;
 }
 
 .game-card {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    padding: 20px;
-    border-radius: 10px;
-    transition: 0.3s;
-    overflow: hidden;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 20px;
+  border-radius: 10px;
+  transition: 0.3s;
+  overflow: hidden;
 }
 
 .game-card:hover {
-    background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.2);
 }
 
 .game-image {
-    width: 100%;
-    height: 220px;
-    object-fit: cover;
-    border-radius: 8px;
-    margin: 10px 0;
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin: 10px 0;
 }
 
 .game-card h3 {
-    font-size: 18px;
-    text-align: center;
-    margin-bottom: 10px;
+  font-size: 18px;
+  text-align: center;
+  margin-bottom: 10px;
 }
 
 .game-card p {
-    font-size: 14px;
-    margin-top: 5px;
-    text-align: left;
+  font-size: 14px;
+  margin-top: 5px;
+  text-align: left;
 }
 
 .browse-page {
-    max-width: 1100px;
-    width: 95%;
-    min-width: 420px;
+  max-width: 1100px;
+  width: 95%;
+  min-width: 420px;
 }
 
 .browse-page .featured .game-card {
-    width: calc(50% - 12.5px);
+  width: calc(50% - 12.5px);
 }
 
 .game-page {
-    max-width: 95vw;
-    width: 95%;
-    min-width: 420px;
-    padding: 50px 60px;
+  max-width: 95vw;
+  width: 95%;
+  min-width: 420px;
+  padding: 50px 60px;
 }
 
 .game-page .game-card {
-    display: flex;
-    gap: 35px;
-    align-items: flex-start;
-    background: rgba(255,255,255,0.1);
-    border: 1px solid rgba(255,255,255,0.2);
-    padding: 30px;
-    border-radius: 14px;
-    margin: 25px 0;
+  display: flex;
+  gap: 35px;
+  align-items: flex-start;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 30px;
+  border-radius: 14px;
+  margin: 25px 0;
 }
 
 .game-page .game-image {
-    flex: 0 0 280px;
-    width: 280px;
-    height: 420px;
-    object-fit: cover;
-    border-radius: 10px;
+  flex: 0 0 280px;
+  width: 280px;
+  height: 420px;
+  object-fit: cover;
+  border-radius: 10px;
 }
 
 .game-details {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .game-desc-title {
-    font-size: 40px;
-    font-weight: 700;
-    margin-bottom: 5px;
+  font-size: 40px;
+  font-weight: 700;
+  margin-bottom: 5px;
 }
 
 .game-meta {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .game-meta p {
-    margin: 0;
-    font-size: 22px;
-    line-height: 1.7;
+  margin: 0;
+  font-size: 22px;
+  line-height: 1.7;
 }
 
 .game-description {
-    color: rgba(255, 255, 255, 0.95);
-    font-size: 21px;
-    line-height: 1.9;
-    margin-top: 10px;
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 21px;
+  line-height: 1.9;
+  margin-top: 10px;
 }
 
 .rating-box {
-    width: fit-content;
-    padding: 20px 28px;
-    background: rgba(255,255,255,0.12);
-    border-radius: 12px;
-    margin-top: 10px;
+  width: fit-content;
+  padding: 20px 28px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  margin-top: 10px;
 }
 
 .rating-box h3 {
-    font-size: 26px;
-    margin-bottom: 10px;
+  font-size: 26px;
+  margin-bottom: 10px;
 }
 
 .rating-score {
-    font-size: 28px;
-    font-weight: 700;
+  font-size: 28px;
+  font-weight: 700;
 }
 
 .rating-score i {
-    color: gold;
-    margin-right: 6px;
+  color: gold;
+  margin-right: 6px;
 }
 
 .game-page h1 {
-    font-size: 52px;
-    text-align: center;
-    margin-bottom: 25px;
+  font-size: 52px;
+  text-align: center;
+  margin-bottom: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+
+.wishlist-star {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: #fff;
+}
+
+.wishlist-star i {
+  font-size: 34px;
+}
+
+.wishlist-star:hover {
+  transform: translateY(-1px);
 }
 
 .game-page h3 {
-    font-size: 32px;
-    margin-bottom: 15px;
+  font-size: 32px;
+  margin-bottom: 15px;
 }
 
 .game-page .review-card {
-    background: rgba(255,255,255,0.1);
-    border: 1px solid rgba(255,255,255,0.2);
-    padding: 22px;
-    margin: 18px 0;
-    border-radius: 12px;
-    transition: 0.3s;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 22px;
+  margin: 18px 0;
+  border-radius: 12px;
+  transition: 0.3s;
 }
 
 .game-page .review-card:hover {
-    background: rgba(255,255,255,0.15);
+  background: rgba(255, 255, 255, 0.15);
 }
 
 .review-card p {
-    font-size: 18px;
-    line-height: 1.7;
+  font-size: 18px;
+  line-height: 1.7;
 }
 
 textarea {
-    width: 100%;
-    min-height: 140px;
-    padding: 18px;
-    border-radius: 14px;
-    border: 2px solid rgba(255,255,255,0.2);
-    background: transparent;
-    color: white;
-    font-size: 18px;
-    resize: vertical;
-    outline: none;
+  width: 100%;
+  min-height: 140px;
+  padding: 18px;
+  border-radius: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  background: transparent;
+  color: white;
+  font-size: 18px;
+  resize: vertical;
+  outline: none;
 }
 
 textarea::placeholder {
-    color: rgba(255,255,255,0.8);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.navbar {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 28px;
+  margin: 10px 0 20px;
+}
+
+.navbar a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.navbar a:hover {
+  text-decoration: underline;
 }
 
 .profile-page {
-    max-width: 900px;
-    width: 95%;
-    min-width: 420px;
-    padding: 50px 60px;
+  max-width: 900px;
+  width: 95%;
+  min-width: 420px;
+  padding: 50px 60px;
 }
 
 .profile-card {
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-    background: rgba(255,255,255,0.1);
-    border: 1px solid rgba(255,255,255,0.2);
-    padding: 30px;
-    border-radius: 14px;
-    margin: 25px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 30px;
+  border-radius: 14px;
+  margin: 25px 0;
 }
 
 .profile-section-title {
-    font-size: 32px;
-    font-weight: 700;
-    margin-bottom: 10px;
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 10px;
 }
 
 .profile-meta {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .profile-meta p {
-    font-size: 20px;
-    line-height: 1.7;
-    margin: 0;
+  font-size: 20px;
+  line-height: 1.7;
+  margin: 0;
 }
 
 .profile-stats {
-    width: fit-content;
-    padding: 20px 28px;
-    background: rgba(255,255,255,0.12);
-    border-radius: 12px;
+  width: fit-content;
+  padding: 20px 28px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
 }
 
 .profile-stats h3 {
-    font-size: 24px;
-    margin-bottom: 10px;
+  font-size: 24px;
+  margin-bottom: 10px;
 }
 
 .profile-stats p {
-    font-size: 22px;
-    font-weight: 600;
-    margin: 8px 0;
+  font-size: 22px;
+  font-weight: 600;
+  margin: 8px 0;
 }
 
 .profile-page h1 {
-    font-size: 52px;
-    text-align: center;
-    margin-bottom: 25px;
+  font-size: 52px;
+  text-align: center;
+  margin-bottom: 25px;
 }
 
 .profile-page .review-card {
-    background: rgba(255,255,255,0.1);
-    border: 1px solid rgba(255,255,255,0.2);
-    padding: 22px;
-    margin: 18px 0;
-    border-radius: 12px;
-    transition: 0.3s;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 22px;
+  margin: 18px 0;
+  border-radius: 12px;
+  transition: 0.3s;
 }
 
 .profile-page .review-card:hover {
-    background: rgba(255,255,255,0.15);
+  background: rgba(255, 255, 255, 0.15);
 }
 
-
-
-
-
-
 @media (max-width: 768px) {
+  .browse-page .featured .game-card {
+    width: 100%;
+  }
 
+  .browse-page {
+    width: 95%;
+    padding: 25px;
+  }
 
-    .browse-page .featured .game-card {
-        width: 100%;
-    }
+  .game-page {
+    padding: 25px;
+  }
 
-    .browse-page {
-        width: 95%;
-        padding: 25px;
-    }
+  .game-page .game-card {
+    flex-direction: column;
+  }
 
-    .game-page {
-        padding: 25px;
-    }
+  .game-page .game-image {
+    width: 100%;
+    height: 350px;
+  }
 
-    .game-page .game-card {
-        flex-direction: column;
-    }
+  .game-page h1 {
+    font-size: 38px;
+  }
 
-    .game-page .game-image {
-        width: 100%;
-        height: 350px;
-    }
+  .game-desc-title {
+    font-size: 30px;
+  }
 
-    .game-page h1 {
-        font-size: 38px;
-    }
-
-    .game-desc-title {
-        font-size: 30px;
-    }
-
-    .game-meta p,
-    .game-description {
-        font-size: 18px;
-    }
+  .game-meta p,
+  .game-description {
+    font-size: 18px;
+  }
 }

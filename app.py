@@ -302,13 +302,20 @@ def game_page(game_id):
         SELECT AVG(rating) as avg FROM reviews WHERE game_id = ?
     """, (game_id,)).fetchone()["avg"]
 
+    is_favourite_row = conn.execute(
+        "SELECT 1 FROM wishlist WHERE user_id = ? AND game_id = ?",
+        (session["user_id"], game_id)
+    ).fetchone()
+    is_favourite = is_favourite_row is not None
+
     conn.close()
 
     return render_template(
         "game.html",
         game=game,
         reviews=reviews,
-        avg_rating=round(avg_rating, 1) if avg_rating else "No ratings"
+        avg_rating=round(avg_rating, 1) if avg_rating else "No ratings",
+        is_favourite=is_favourite
     )
 
 
